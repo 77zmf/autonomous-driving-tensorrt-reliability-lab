@@ -1,0 +1,71 @@
+name: CPU CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cpu-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  host-only:
+    name: Python unittest and CMake without CUDA
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements*.txt
+            setup.cfg
+
+      - name: Install host-side Python test dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --editable .
+          if [[ -f requirements-dev.txt ]]; then
+            python -m pip install -r requirements-dev.txt
+          elif [[ -f requirements.txt ]]; then
+            python -m pip install -r requirements.txt
+          fi
+
+      - name: Run Python unit tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Check host-side scripts
+        run: |
+          python -m compileall -q src tests scripts
+          bash -n scripts/check_environment.sh scripts/run_cpu_checks.sh
+          python scripts/capture_environment.py >/dev/null
+
+      - name: Configure host-only CMake build
+        run: >-
+          cmake -S . -B build/cpu
+          -DCMAKE_BUILD_TYPE=Release
+          -DTRT_LAB_ENABLE_CUDA=OFF
+          -DTRT_LAB_ENABLE_TENSORRT=OFF
+          -DTRT_LAB_BUILD_TESTS=ON
+
+      - name: Build host-only C++ targets
+        run: cmake --build build/cpu --config Release --parallel 2
+
+      - name: Run host-only CTest suite
+        run: ctest --test-dir build/cpu --build-config Release --output-on-failure
+
+      - name: State validation boundary
+        run: |
+          echo "CPU CI passed host-side checks only."
+          echo "It does not validate CUDA, TensorRT, GPU accuracy, performance, or stability."

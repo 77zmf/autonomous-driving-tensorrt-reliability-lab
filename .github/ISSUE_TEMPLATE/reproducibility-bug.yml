@@ -1,0 +1,132 @@
+name: Reproducibility or reliability report
+description: Report a public, minimal, evidence-backed failure in this lab.
+title: "[repro]: "
+labels:
+  - reproducibility
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use only public or synthetic assets. Do not include company/customer code,
+        models, data, logs, screenshots, metrics, incident text, credentials,
+        private hosts/endpoints, personal data, or precise location data.
+
+        CPU CI does not validate CUDA, TensorRT, GPU accuracy, performance, or
+        stability. State the evidence level and tested environment explicitly.
+
+  - type: dropdown
+    id: failure_class
+    attributes:
+      label: Failure class
+      options:
+        - Accuracy or numerical drift
+        - Shape, operator, build, or runtime failure
+        - Performance or stability
+        - CPU-only build or test infrastructure
+        - Documentation or experiment protocol
+    validations:
+      required: true
+
+  - type: dropdown
+    id: evidence_level
+    attributes:
+      label: Evidence level
+      description: E0 specified, E1 CPU verified, E2 GPU smoke-tested, E3 measured, E4 reproduced.
+      options:
+        - E0 - specified only
+        - E1 - CPU verified
+        - E2 - GPU smoke-tested
+        - E3 - measured under the repository protocol
+        - E4 - independently reproduced
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Symptom and impact
+      description: State the observable symptom, first failing phase/sample, and scoped impact.
+      placeholder: |
+        Expected:
+        Observed:
+        First failure:
+        Impact:
+        Not established:
+    validations:
+      required: true
+
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Public asset provenance
+      description: Provide canonical URLs, exact revisions, licenses/terms, subset IDs, and SHA-256 hashes.
+      placeholder: |
+        Model/code URL and revision:
+        Checkpoint URL and SHA-256:
+        Dataset/input URL, subset, and license:
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Redacted environment
+      description: Do not include hostnames, usernames, IPs, endpoints, private paths, or secrets.
+      placeholder: |
+        Repository commit and dirty state:
+        OS / CPU / compiler / Python:
+        GPU / driver / CUDA / TensorRT (if relevant):
+        PyTorch / ONNX / ONNX Runtime:
+        Precision / shapes / profiles / batch / concurrency:
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Exact minimal reproduction
+      description: Include complete commands using only public/synthetic inputs and link unedited redacted artifacts.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Raw evidence and investigation
+      description: Link logs/raw samples/traces and list hypotheses tested. A summary alone is insufficient.
+      placeholder: |
+        Raw artifact paths and SHA-256:
+        Hypothesis 1 / controlled test / observation:
+        Hypothesis 2 / controlled test / observation:
+        Weakest evidence:
+        Falsifying next test:
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_fix
+    attributes:
+      label: Root cause and proposed regression
+      description: If causality is not established, label it a hypothesis. Explain the test that fails before and passes after a fix.
+      placeholder: |
+        Root cause or hypothesis:
+        Causal evidence:
+        Proposed fix/workaround:
+        Regression test and pass criterion:
+
+  - type: checkboxes
+    id: public_boundary
+    attributes:
+      label: Public-release confirmation
+      options:
+        - label: I used only public/synthetic assets and recorded their provenance, license terms, and hashes.
+          required: true
+        - label: This report contains no company/customer code, data, logs, configuration, metrics, screenshots, or incident text.
+          required: true
+        - label: I removed credentials, personal data, private hosts/endpoints/paths, location traces, and identifying metadata.
+          required: true
+        - label: I inspected logs, traces, archives, images, and generated artifacts rather than relying only on an automated secret scan.
+          required: true
+        - label: I have not inferred any GPU, CUDA, TensorRT, accuracy, performance, or stability result from CPU-only CI.
+          required: true

@@ -1,0 +1,62 @@
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# CMake / native builds
+CMakeCache.txt
+CMakeFiles/
+cmake-build-*/
+compile_commands.json
+Testing/
+
+# GPU build and profiling artifacts
+*.engine
+*.plan
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.weights
+*.timing
+*.nsys-rep
+*.qdrep
+*.ncu-rep
+*.sqlite
+*.sqlite3
+*.bag
+*.mcap
+*.db3
+*.log
+
+# Models, datasets, and raw captures stay local by default
+models/*
+!models/README.md
+data/*
+!data/README.md
+artifacts/*
+!artifacts/README.md
+
+# Local experiment outputs; only curated summaries belong in results/
+results/raw/
+reports/generated/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+secrets*

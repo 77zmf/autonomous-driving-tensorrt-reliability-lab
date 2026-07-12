@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security-sensitive report
+    url: https://github.com/77zmf/autonomous-driving-tensorrt-reliability-lab/security
+    about: Do not disclose credentials, private systems, or exploitable third-party details in a public issue.

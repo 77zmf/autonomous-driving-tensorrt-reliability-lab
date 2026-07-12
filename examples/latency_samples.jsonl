@@ -1,0 +1,6 @@
+{"iteration": 0, "component": "inference", "latency_ms": 4.8}
+{"iteration": 1, "component": "inference", "latency_ms": 4.6}
+{"iteration": 2, "component": "inference", "latency_ms": 4.9}
+{"iteration": 0, "component": "end_to_end", "latency_ms": 7.4}
+{"iteration": 1, "component": "end_to_end", "latency_ms": 7.1}
+{"iteration": 2, "component": "end_to_end", "latency_ms": 7.6}
