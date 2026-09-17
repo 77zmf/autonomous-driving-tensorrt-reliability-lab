@@ -2,6 +2,17 @@
 
 A public, reproducible engineering lab for learning how to deploy an autonomous-driving model on NVIDIA GPUs and how to diagnose correctness, performance, and stability failures.
 
+## Start here
+
+- [Project entry point and first contribution](docs/start-here.md)
+- [Reproducible experiment protocol](docs/reproducible-experiment-protocol.md)
+- [Release governance and test-to-version traceability](docs/release-governance/README.md)
+
+The public `autoware-release-sop` documentation is now maintained under
+`docs/release-governance/`, with its original Git history and MIT license.
+This consolidates related documentation, not an Autoware runtime or a vehicle
+release. See the [import record](docs/release-governance/PROVENANCE.md).
+
 The project is organized around one evidence loop:
 
 ```text
@@ -38,6 +49,7 @@ src/trt_lab/         CPU-side benchmark parsing and report CLI
 tests/               CPU-side unit tests
 configs/             Reproducible experiment manifests
 docs/                Architecture, roadmap, and experiment protocol
+docs/release-governance/  Imported release SOP, traceability, and report templates
 reports/templates/   Failure-analysis and experiment templates
 models/              Local public model files (ignored by git)
 data/                Local public or synthetic data (ignored by git)
@@ -120,3 +132,10 @@ This is a public portfolio repository. Do not copy employer or customer code, lo
 - [TensorRT performance benchmarking](https://docs.nvidia.com/deeplearning/tensorrt/latest/performance/benchmarking.html)
 - [Nsight Systems](https://docs.nvidia.com/nsight-systems/)
 - [Nsight Compute](https://docs.nvidia.com/nsight-compute/NsightCompute/index.html)
+
+## License scope
+
+The imported release-governance documents retain their
+[MIT license](docs/release-governance/LICENSE). This import does not select or
+change a license for the rest of the lab. Public visibility alone does not
+establish redistribution permission for other files.

@@ -1,45 +1,32 @@
-# autoware-release-sop
+# Release governance
 
-# Autoware Release SOP
+Generic process drafts for binding a release candidate to source revisions,
+test evidence, reviewed artifacts, and an approved recovery plan.
 
-This repository documents a **practical release and version management workflow**
-for Autoware-based autonomous driving projects.
+These documents were consolidated from `77zmf/autoware-release-sop` on
+2026-09-17. They are maintained here; the original repository remains available
+for old links, tags, and history. See [provenance](PROVENANCE.md) and the
+unchanged [MIT license](LICENSE).
 
-## Scope
+## Status and scope
 
-- Release governance
-- Test and validation workflow
-- Test-to-tag traceability
-- Dependency version locking
-- Production-ready release process
-
-> This repository contains **process documentation only**.  
-> No proprietary or company-specific source code is included.
-
-## Repository Structure
-
-- `docs/sop/`  
-  Core release and testing SOP documents
-
-- `docs/diagrams/`  
-  Visualized release workflows (Mermaid)
-
-- `docs/templates/`  
-  Templates for release test reports
+This is documentation, not an official Autoware release policy, a working
+deployment system, safety certification, or evidence of a tested vehicle.
+The initial import included incomplete and empty pages; they were repaired
+during consolidation. Operational use still needs project-specific owners,
+acceptance criteria, infrastructure, and target validation.
 
 ## Documents
 
-- [Autoware Release SOP](docs/sop/autoware-release-sop.md)
-- [Release Flow Diagram](docs/diagrams/release-flow.md)
-- [Test Record & Tag Binding Rules](docs/sop/test-and-tag-binding.md)
-- [Release Test Report Template](docs/templates/release-test-report-template.md)
+- [Release workflow](docs/sop/autoware-release-sop.md)
+- [Test record and version binding](docs/sop/test-and-tag-binding.md)
+- [Release flow diagram](docs/diagrams/release-flow.md)
+- [One-page checklist](docs/sop/cheatsheet.md)
+- [Rollback and incident response](docs/sop/rollback-procedure.md)
+- [Test report template](docs/templates/release-test-report-template.md)
+- [Historical empty report placeholder](docs/release/release-v0.46.0.20260203.md)
 
-## Motivation
-
-This SOP is derived from real-world autonomous driving projects,
-where reproducibility, traceability, and release stability are critical.
-
-It is designed for:
-- Test Owners
-- Release Owners
-- System Integration Engineers
+For inference-specific experiments, begin with the lab's
+[reproducible experiment protocol](../reproducible-experiment-protocol.md).
+The two evidence levels remain separate: a model-level result is not a
+system-level release approval.

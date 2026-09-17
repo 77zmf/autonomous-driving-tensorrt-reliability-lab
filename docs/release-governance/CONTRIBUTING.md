@@ -1,5 +1,10 @@
 # Contributing Guide
 
+This documentation is now maintained in the reliability lab. Follow the
+[lab contribution guide](../../CONTRIBUTING.md), keep the imported MIT notice,
+and record significant changes in [the changelog](CHANGELOG.md). The original
+source-repository conventions below are retained as documentation context.
+
 Thank you for contributing to this SOP repository.
 
 This repository documents **release and version governance practices**.
